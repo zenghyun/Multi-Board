@@ -1,4 +1,4 @@
-const Router = require('koa-router');
+import Router from 'koa-router';
 import * as postsCtrl from './posts.ctrl';
 import checkLoggedIn from '../../lib/checkLoggedIn';
 
@@ -14,5 +14,4 @@ post.patch('/', checkLoggedIn, postsCtrl.checkOwnPost, postsCtrl.update);
 
 posts.use('/:id', postsCtrl.getPostById, post.routes());
 
-
-export default posts; 
+export default posts;
