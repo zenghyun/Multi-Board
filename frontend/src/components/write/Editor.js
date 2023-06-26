@@ -6,10 +6,10 @@ import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 
 const EditorBlock = styled(Responsive)`
+  /* 페이지 위 아래 여백 지정 */
   padding-top: 5rem;
   padding-bottom: 5rem;
 `;
-
 const TitleInput = styled.input`
   font-size: 3rem;
   outline: none;
@@ -19,37 +19,30 @@ const TitleInput = styled.input`
   margin-bottom: 2rem;
   width: 100%;
 `;
-
 const QuillWrapper = styled.div`
+  /* 최소 크기 지정 및 padding 제거 */
   .ql-editor {
     padding: 0;
     min-height: 320px;
     font-size: 1.125rem;
     line-height: 1.5;
   }
-
   .ql-editor.ql-blank::before {
     left: 0px;
   }
 `;
 
 const Editor = ({ title, body, onChangeField }) => {
-  const quillElement = useRef(null); // Quill을 적용할 DivElement 설정
+  const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
   const quillInstance = useRef(null); // Quill 인스턴스를 설정
-
-  var bold = Quill.import('formats/bold');
-  bold.tagName = 'b';
-  Quill.register(bold, true);
-
-  var italic = Quill.import('formats/italic');
-  italic.tagName = 'i';
-  Quill.register(italic, true);
 
   useEffect(() => {
     quillInstance.current = new Quill(quillElement.current, {
       theme: 'bubble',
       placeholder: '내용을 작성하세요...',
       modules: {
+        // 더 많은 옵션
+        // https://quilljs.com/docs/modules/toolbar/ 참고
         toolbar: [
           [{ header: '1' }, { header: '2' }],
           ['bold', 'italic', 'underline', 'strike'],
@@ -59,10 +52,9 @@ const Editor = ({ title, body, onChangeField }) => {
       },
     });
 
+    // quill에 text-change 이벤트 핸들러 등록
+    // 참고: https://quilljs.com/docs/api/#events
     const quill = quillInstance.current;
-
-    quill.setContents([{ insert: '\n' }]);
-
     quill.on('text-change', (delta, oldDelta, source) => {
       if (source === 'user') {
         onChangeField({ key: 'body', value: quill.root.innerHTML });
@@ -70,9 +62,16 @@ const Editor = ({ title, body, onChangeField }) => {
     });
   }, [onChangeField]);
 
-  const onChangeTitle = (e) => {
+  const mounted = useRef(false);
+  useEffect(() => {
+    if (mounted.current) return;
+    mounted.current = true;
+    quillInstance.current.root.innerHTML = body;
+  }, [body]); 
+
+  function onChangeTitle(e) {
     onChangeField({ key: 'title', value: e.target.value });
-  };
+  }
 
   return (
     <EditorBlock>

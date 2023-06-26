@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import RootLayout from './pages/Root';
+import { Helmet } from 'react-helmet-async';
 
 const router = createBrowserRouter([
   {
@@ -13,41 +14,46 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        index: true, 
-        element: <PostListPage />
+        index: true,
+        element: <PostListPage />,
       },
       {
-        path: ':username', 
+        path: ':username',
         children: [
           {
-            index: true, 
+            index: true,
             element: <PostListPage />,
           },
           {
             path: ':postId',
-            element: <PostPage />
-          }
-        ]
+            element: <PostPage />,
+          },
+        ],
       },
       {
-        path: '/login', 
-        element: <LoginPage />
+        path: '/login',
+        element: <LoginPage />,
       },
       {
         path: '/register',
-        element: <RegisterPage />
+        element: <RegisterPage />,
       },
       {
         path: '/write',
-        element: <WritePage />
+        element: <WritePage />,
       },
-    ]
-  }
+    ],
+  },
 ]);
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <>
+      <Helmet>
+        <title>Multi Boards</title>
+      </Helmet>
+      <RouterProvider router={router} />
+    </>
   );
 }
 

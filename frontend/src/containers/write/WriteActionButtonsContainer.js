@@ -2,25 +2,44 @@ import React, { useEffect } from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { writePost } from '../../modules/write';
+import { writePost, updatePost } from '../../modules/write';
+import { writeActionButtonsSelector } from '../selectors';
 
 const WriteActionButtonsContainer = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title, body, tags, post, postError } = useSelector(({ write }) => ({
-    title: write.title,
-    body: write.body,
-    tags: write.tags,
-    post: write.post,
-    postError: write.postError,
-  }));
+  const dispatch = useDispatch();
+  const {
+    title,
+    body,
+    tags,
+    post,
+    postError,
+    originalPostId
+  } = useSelector(writeActionButtonsSelector);
 
   // 포스트 등록
   const onPublish = () => {
-    dispatch(writePost({ title, body, tags }));
+    if (originalPostId) {
+      dispatch(
+        updatePost({
+          title,
+          body,
+          tags,
+          id: originalPostId
+        })
+      );
+      return;
+    }
+    dispatch(
+      writePost({
+        title,
+        body,
+        tags
+      })
+    );
   };
 
-  // 등록 취소
+  // 취소
   const onCancel = () => {
     navigate(-1);
   };
@@ -28,15 +47,19 @@ const WriteActionButtonsContainer = () => {
   // 성공 혹은 실패시 할 작업
   useEffect(() => {
     if (post) {
-      const { _id, user } = post;
-      navigate(`/${user.username}/${_id}`);
+      const {
+        _id,
+        user
+      } = post;
+      console.log(post);
+      navigate(`/@${user.username}/${_id}`);
     }
     if (postError) {
       console.log(postError);
     }
   }, [navigate, post, postError]);
 
-  return <WriteActionButtons onPublish={onPublish} onCancel={onCancel} />;
+  return <WriteActionButtons onPublish={onPublish} onCancel={onCancel} isEdit={!!originalPostId} />;
 };
 
 export default WriteActionButtonsContainer;

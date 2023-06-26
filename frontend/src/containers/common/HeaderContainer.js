@@ -1,15 +1,18 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/common/Header';
 import { logout } from '../../modules/user';
+import { getUser } from '../selectors';
 
 const HeaderContainer = () => {
-  const { user } = useSelector(({ user }) => ({ user: user.user }));
+  const user = useSelector(getUser); // user 선택자 함수
   const dispatch = useDispatch();
+
   const onLogout = () => {
     dispatch(logout());
   };
-  return <Header user={user} onLogout={onLogout}/>;
+
+  return <Header user={user} onLogout={onLogout} />;
 };
 
 export default HeaderContainer;
