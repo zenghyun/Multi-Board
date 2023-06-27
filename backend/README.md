@@ -443,3 +443,26 @@ export const logout = async (ctx) => {
 };
 
 ```
+
+<br>
+
+## koa-static으로 정적 파일 제공 
+
+``` 
+yarn add koa-static
+```
+
+<br>
+
+📌 src/main.js
+```js
+const buildDirectory = path.resolve(__dirname, '../../frontend/build');
+app.use(serve(buildDirectory));
+app.use(async ctx => {
+  // Not Found이고, 주소가 /api로 시작하지 않는 경우
+  if(ctx.status  === 404 && ctx.path.indexOf('/api') !== 0) {
+    // index.html를 반환
+    await send(ctx, 'index.html', {root: buildDirectory});
+  }
+})
+```
