@@ -1,5 +1,36 @@
 # Frontend
 
+## 기본 설정 파일 만들기 
+
+### 📌  .prettierrc
+
+```js
+{
+    "singleQuote": true,
+    "semi": true,
+    "useTabs": false,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "printWidth": 80
+}
+```
+<br>
+
+### 📌  jsconfig.json
+
+```js
+{
+    "compilerOptions": {
+        "target": "ES6"
+    }
+}
+```
+
+<br>
+
+----
+
+<br>
 
 ## App 컴포넌트 경로 지정 
 
@@ -35,6 +66,7 @@ onst App = () => {
 };
 export default App;
 ```
+<br>
 
 ### 📌 리팩토링 후 
 
@@ -97,10 +129,3 @@ function App() {
 export default App;
 
 ```
-
-<br>
-
-## 리덕스 적용 
-
-<br>
-
