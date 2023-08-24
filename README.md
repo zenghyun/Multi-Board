@@ -1,7 +1,7 @@
 # 📚 Multi Board
 <br>
 
- <p align="center"><img src="https://github.com/zenghyun/Multi-Board/assets/114131063/fb95cf61-4256-4e7a-a818-d4c2e5706c45" width="500px" height="400px"></p> 
+ <p align="center"><img src="https://github.com/zenghyun/ClothesForYou/assets/114131063/30524a75-5770-4d0a-b435-b0ba6f63e6a3" width="500px" height="400px"></p> 
 <br>
 <br>
 
@@ -83,7 +83,7 @@ $ yarn start
    <br>
 
    ### Frontend
-   <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+   <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/reduxsaga-999999?style=for-the-badge&logo=reduxsaga&logoColor=white">
        
 <br>
 
